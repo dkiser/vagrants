@@ -1,0 +1,4 @@
+vagrants
+========
+
+Random VagrantFile's.
