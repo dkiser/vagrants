@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "cent6" do |cent6|
+      cent6.vm.host_name = "centos6-x86-64"
+      cent6.vm.box = "centos6-minimal-x86_64.box"
+      cent6.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box"
+
+      cent6.vm.provision :shell, path: "bootstrap.sh"
+
+      cent6.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
+        vb.customize ["modifyvm", :id, "--cpus", "2"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      end
+  end
+end

@@ -1,0 +1,15 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "rpm-builder" do |builder|
+      builder.vm.host_name = "rpm-builder"
+      builder.vm.box = "centos6-minimal-x86_64.box"
+      builder.vm.box_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130731.box"
+
+      builder.vm.provision :shell, path: "bootstrap.sh"
+
+      builder.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "1024"]
+        vb.customize ["modifyvm", :id, "--cpus", "2"]
+        vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      end
+  end
+end
